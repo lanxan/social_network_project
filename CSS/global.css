@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+body{
+	width:auto;
+	height:auto;
+	background-color:#F2F2F2;
+}
+
+#join-buttom{
+	width:100px;
+	height:35px;
+	margin-bottom:10px;
+	float:left;
+
+}
+
+#about-buttom{
+	width:100px;
+	height:35px;
+	margin-bottom:10px;
+    float:left;
+	background-color:#ABB24A;
+}
+
+#back{
+	margin:auto;
+    width:1000px;
+	height:600px;
+	background-size:1000px 600px;
+    background-image:url('../img/newglobal/green_logo.jpg') ;
+}
+
+#login-left{
+    width:240px;
+	height:520px;
+	padding-left:60px;
+	margin-top:65px;
+	float:left;
+}
+
+#login-right{
+    width:650px;
+	height:525px;
+	margin-left:300px;
+	margin-top:25px;
+}
+
+#Log-in{
+	padding-top:180px;
+}
+
+#Log-in dd{
+	padding-top:5px;
+}
+
+#sign-in{
+	padding-top:10px;
+	padding-left:150px;
+	padding-right: 25px;
+}
+#sign-up{
+	padding-top:15px;
+	padding-left:195px;
+}
+
+
+#aboutus {
+	display:block;
+	padding-top:13px;
+	padding-left:2px;
+}
+
+#address{
+	padding-top:140px;
+	padding-left: 25px;
+}
+#register {
+    display:none;
+}
+
+#register-top{
+	padding-top:13px;
+	padding-left:2px;
+}
+
+#register-buttom{
+	padding-left:155px;
+
+}
+#register-buttom dd{
+    margin-top:10px;
+	
+}
+#fill-in{
+	padding-right: 20px;
+	padding-left: 25px;
+	}

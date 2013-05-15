@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="CSS/index.css"/>
+<script type = "text/javascript" src = "jquery-1.7.1.js"></script>
+<script type = "text/javascript" src = "jquery-1.7.2.min.js"></script>
+<script type = "text/javascript" src = "jquery.cookie.js"></script>
+
+<style type="text/css">
+
+	.style1 {
+		font-family:Arial, Helvetica, sans-serif;
+		color:#FFF;
+		font-weight:bold;
+		font-size:15px;
+	}
+	.style2 {
+		font-size:36px;
+	}
+	
+	#sign-in{
+		cursor	: pointer;
+	}
+	#loginmsg{
+		padding	: 2px;
+		float	: left;
+		color	: yellow;
+	}
+</style>
+<script type="text/javascript" >
+	var id;
+	function changebig(id){
+		var o=document.getElementById(id);
+		o.style.color="#E7B51E";
+	}
+	function changeback(id){
+		var o=document.getElementById(id);
+		o.style.color="white";
+	}	
+	
+	$(document).ready(function(){
+		$("#sign-in").click(function(){
+			$.ajax({
+				url		: 'php/login.php',
+				type	: 'post',
+				data	:{
+					email	: $('input[name=lemail]').val(),
+					passwd	: $('input[name=lpasswd]').val()
+				},
+				dataType: 'json',
+				error	: function(xhr, ajaxOption, thrownError){
+					$("#loginmsg").html('');
+					$("#loginmsg").after(xhr.status);
+					$("#loginmsg").after(xhr.responseText);
+					alert(thrownError);
+				},
+				success	: function(result){
+					$("#loginmsg").html('');
+					if(result.msg == "false1"){
+					 	$("#loginmsg").html('Please call the developer.');
+					}
+					else if(result.msg == "false2"){
+						$("#loginmsg").html('Email or passwd is wrong!');
+					}
+					else if(result.msg == "true"){
+						$.cookie("userid", null); //clear cookie
+						$.cookie("visitid", null);
+						$.cookie("userid", result.id, {expires: 7});
+						$.cookie("visitid", result.id, {expires: 7});
+						location.replace('http://merry.ee.ncku.edu.tw/~jesshao/ex8/home.html');
+					}
+				}
+			});
+		});
+	});
+</script>
+
+
+
+<title>SocialWeb-Global Village</title>
+</head>
+
+<body>
+	<div id="back">
+    	<div id="Log-in">
+			<form id = "lform">
+        		<div id="fill-in">
+                	<dd class="style1">
+                    &nbsp;E-mail&nbsp;<input type="text" name = "lemail" size="14"/>
+                    Password&nbsp;<input type="password" name = "lpasswd" size="14"/>
+                    </dd> 
+					<div id="sign-in"><div id="in" style=" margin-left:5px; margin-top:3px; align:center; color:white;">sign in</div></div>
+                </div>
+				<div id = "loginmsg"></div>
+			</form>
+	    </div>
+        <div id="aboutus">
+        	<u id="ab" onmouseover="changebig(id)" onmouseout="changeback(id)" onclick="location.href='aboutuspage.html'">About&nbsp;us</u>
+        </div>
+        <div id="joinus">
+        	<u id="jo" onmouseover="changebig(id)" onmouseout="changeback(id)" onclick="location.href='joinuspage.html'">Join&nbsp;us</u>
+        </div> 
+    </div>
+</body>
+</html>

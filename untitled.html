@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>home</title>
+	
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<link rel="stylesheet" type="text/css" href="CSS/home.css" />
+<link rel="stylesheet" type="text/css" href="uploadify/uploadify.css"/>
+<style type="text/css">
+.style3 {
+	color: #FFFFFF;
+	font-family: "微軟正黑體";
+}
+.style4 {
+	font-family: "微軟正黑體";
+	font-weight: bold;
+	font-size: 16px;
+}
+/* 文章列表的nadding
+*/
+#b-left-down > div {
+	padding-top:3px;
+	padding-left:4px;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+#nickname {
+	padding:2px;
+	color:yellow;
+	font-size:20px;
+}
+
+</style>
+
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript" src="jquery.cookie.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="js/home.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript">
+	  var map;
+      var markersArray = [];
+	  var geocoder;	
+	  var count=0;
+	  var MapLatLng;
+	  var setlocation=[];
+	  var here;
+	  var Lat;
+	  var Lng;
+      function initialize() {
+	  	geocoder = new google.maps.Geocoder();
+        var haightAshbury = new google.maps.LatLng(23.5, 121);
+        var mapOptions = {
+          zoom: 6,
+          center: haightAshbury,
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+		MapLatLng=new google.maps.LatLng(Lat,Lng);	
+
+      }
+	  
+	  function add(){
+	    var add =google.maps.event.addListener(map, 'click', function(event) {
+      	addMarker(event.latLng);
+     	
+		google.maps.event.removeListener(add);
+        });	
+	  	
+	  }
+	   
+      // Add a marker to the map and push to the array.
+      function addMarker(location) {
+		setlocation[count]=location;
+		
+		count=count+1;
+	  	var marker = new google.maps.Marker({
+   		position: location,
+		map: map
+		});
+
+		var contentString = '<div id="content">'+
+    		'<div id="siteNotice">'+
+    		'</div>'+
+    		'<div id="bodyContent" style=" overflow-x:hidden; overflow-y:hidden;">'+
+			'<dt>新增</dt>'+
+			'<input onClick="load20()" type=button value="相片"/>'+
+			'<dt>影音</dt>'+
+			'<dt>旅遊紀錄..................</dt>'+
+			'<a href="#" onclick=deletemarker()>刪除</a>'+    
+   		    '</div>'+
+  		    '</div>';
+		
+		var infowindow = new google.maps.InfoWindow({
+   		content: contentString,
+		maxWidth: 200
+		});
+
+		google.maps.event.addListener(marker, 'click', function(event) {
+		here=event.latLng;
+  		infowindow.open(map,marker);
+		});
+		markersArray.push(marker);
+     	 }
+
+		
+function clearOverlays() {
+  if (markersArray) {
+    for (i in markersArray) {
+      markersArray[i].setMap(null);
+    }
+  }
+}
+
+// Shows any overlays currently in the array
+function showOverlays() {
+	if (markersArray) {
+		for (i in markersArray) {
+			markersArray[i].setMap(map);
+		}
+	}
+}
+
+// Deletes all markers in the array by removing references to them
+//function deleteOverlays() {
+// if (markersArray) {
+// for (i in markersArray) {
+//   markersArray[i].setMap(null);
+//  }
+//  markersArray.length = 0;
+// }
+//}
+
+	  
+function deletemarker() {
+	if (markersArray) {
+		for (i in markersArray) {
+			if(setlocation[i]==here)
+				{markersArray[i].setMap(null);}
+		}
+	}
+}  
+	  
+  	
+	  function codeAddress() {
+    	var address = document.getElementById("address").value;
+     	$("#add1").append(address);
+    	geocoder.geocode( { 'address': address}, function(results, status) {
+      	if (status == google.maps.GeocoderStatus.OK) {
+        	map.setCenter(results[0].geometry.location);
+        	addMarker(results[0].geometry.location);
+			markersArray.push(marker);
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }	
+      google.maps.event.addDomListener(window, 'load', initialize);    
+
+</script>
+<script type="text/javascript">
+	/*這個是googel 分析的程式碼
+	 */
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-32230248-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	   
+	jQuery(document).ready(function () {	
+		$('input.one').simpleDatepicker();
+	});
+	/* Google Analytics end
+	 */
+</script>
+
+</head>
+
+<body>
+<div id="back">
+<div id="back-back">
+
+	<div id="aaa">
+		<div id="s-photo">
+			<img src="../img/newglobal/bighead.jpg" width="50" height="50"> 
+		</div>	
+		<div id="countnum">
+			<div id = "nickname"></div>
+		</div>
+	</div>
+
+	<div id="bbb">
+		<div id="m-main">
+	
+	
+			<div id="bup">
+				<div id="bleftup">
+				
+	
+					<div id="intro">
+						<div id="pic">
+							<img src="../img/newglobal/bighead.jpg" width="75" height="75">                
+						</div>
+						<div id="sim-intro">
+							<dt id = "fullname"></dt>
+							<dd style="font-family:'微軟正黑體'">工作單位</dd>
+							<dl id = "work"></dl>
+							<dd style="font-family:'微軟正黑體'">目前位置</dd>
+							<dl id = "nowin"></dl>
+						</div>
+					</div>			
+				
+				
+				
+				
+				</div>
+		
+				<div id="brightup">
+					<div id="brightup1">
+					</div>
+					<div id="brightup2">
+					</div>
+					<div id="brightup3">
+					</div>										
+						
+				</div>	
+			</div>	
+	
+	
+			<div id="bdown">
+				<div id="bleftdown">
+				
+					<div id="map">
+						<div id="mapcountrol" >
+							<input onClick="clearOverlays();" type=button value="hide"/>
+							<input onClick="showOverlays();" type=button value="show"/>
+							<input id="address" type="textbox" value="Taiwan">
+							<input type="button" id="find" value="Find address" onClick="codeAddress()">
+	
+							<div class="mapdiv" id="map-canvas">
+							</div>
+						</div>
+	
+					</div>
+	
+				</div>
+	
+				<div id="brightdown" style=" overflow:auto" >
+					<div id="brightdown1">	
+						<div id="add">
+							<div style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;標記位置&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>							
+							<div id="add1">	
+							</div>
+							
+							<div id="add2">
+														
+							</div>						
+						</div>
+					
+					</div>					
+						
+					<div id="brightdown2">	
+						<div id="bb">
+							<div id="d">
+								<div "d1" style="float:left">
+									<img src="img/newglobal/chat-head.jpg" width="42" height="40">		
+								</div>
+								<div id="d2" style="float:left">
+									<p id = "this_user"></p>
+								</div>
+								<div id="but"><button>留言</button></div>
+							</div>
+							<div>
+								<input type="text" id="inputbox" name = "inputbox" value="" >
+							</div>
+	
+						</div>				
+						<div id="msn">
+	
+						</div>	
+					</div>
+					<div id="brightdown3" style="display:none">	
+
+					</div>					
+						
+				</div>
+			</div>
+	
+	
+		</div>
+		
+		<div id="p-main">
+        	<div id="p-main-left">
+        	<div id="p-main-left-top">
+            	<div id="timeline" style="float:left; margin:auto; width:60px; height:30px; border-radius:10px; color:#FFF; background-color:#00C;">時間軸</div>
+                <div id="addnew" style="margin:auto; width:60px; height:30px; border-radius:10px; color:#FFF; background-color:#00C;">新增</div>
+                <dt>相簿名稱:澎湖之旅</dt>
+                <dt>拍攝時間:2010/10/05</dt>
+            </div>
+            <div id="p-main-left-mid">
+            	<img src="img/newglobal/boy3photo.jpg" width="80" height="90"/>
+            </div>
+            <div id="p-main-left-bot">
+            	<div id="last"></div>
+            </div>
+        </div>
+        <div id="p-main-right">
+        	<div id="p-main-right-top">
+            	<div id="prev" title = "上一頁">
+                	<input type="image" src="img/newglobal/back.jpg" width="35px" height="400px" style=" float:left;" onclick="move(-1)"/>
+              	</div>
+                <div id="photo">
+                	<img src="img/newglobal/photo/DSC00001.JPG" id="bigpic" width="530" height="400" style=" float:left;"/>
+                </div>
+            	<div id="next" title = "下一頁">
+                	<input type="image" src="img/newglobal/next.JPG" width="35px" height="400px" style=" float:left;" onclick="move(1)"/>
+                	<div id="photointro">
+                		<dd style="margin:auto; font-size:24px; color:#FFF; font-weight:bold;">相片介紹</dd>
+               		</div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+		<div id="v-main"></div>
+		<div id="b-main">
+			<div id="b-left">
+				<div id="b-left-up">
+					<dd class="style3">新增文章</dd>
+				</div>
+				<div id="b-left-mid">
+					<dd class="style4">文章列表</dd>
+				</div>	
+				<div id="b-left-down">
+					<div id="b-add" class="style3">
+					</div>
+				</div>				
+			</div>
+			<div id="b-right">
+				<div id="b-right-up">
+					<div id="b-right-up-left">
+						<p class="style3">文章標題</p>	
+					</div>
+					<div id="b-right-up-right">
+						<input type="text" name = "blog-title" value="" size="65" id="con0"/>
+					</div>					
+				</div>
+				<div id="b-right-down">
+					<div id="b-right-dleft">
+						<div id="b-right-dleftup">
+						
+						</div>
+						<div id="b-right-dleftdown">
+							<p class="style3">日期&nbsp;<input type="text" name = "blog-date" size="13" id="con1" class="one"/></p>
+							<p class="style3">位置&nbsp;<input type="text" name = "blog-site" size="13" id="con2"/></p>
+						</div>						
+					</div>	
+					<div id="b-right-dright">
+						<textarea cols="34" rows="22" id="con3" name = "blog-text"></textarea>
+						<div id="b-right-dright-but" class="style3">
+						  <div align="center" id="b-save">儲存</div>
+						</div>
+					</div>			
+				</div>					
+			</div>
+		</div>		
+		
+		<div id="back-down-right">
+			<div id="first">
+			</div>
+			<div id="second">
+			</div>
+			<div id="third">
+			</div>
+			<div id="fourth">
+			</div>
+								
+		</div>
+	</div>
+</div>
+</div>	
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+<link rel="stylesheet" type="text/css" href="CSS/photo.css"/>
+<script type="text/javascript">
+		var counter=0;
+		var moveway;
+		var number=30;
+		imgfile = new Array(number);
+		imgfile[0]="img/newglobal/photo/DSC00001.JPG";imgfile[1]="img/newglobal/photo/DSC00002.JPG";
+		imgfile[2]="img/newglobal/photo/DSC00003.JPG";imgfile[3]="img/newglobal/photo/DSC00004.JPG";
+		imgfile[4]="img/newglobal/photo/DSC00005.JPG";imgfile[5]="img/newglobal/photo/DSC00006.JPG";
+		imgfile[6]="img/newglobal/photo/DSC00007.JPG";imgfile[7]="img/newglobal/photo/DSC00008.JPG";
+		imgfile[8]="img/newglobal/photo/DSC00009.JPG";imgfile[9]="img/newglobal/photo/DSC00010.JPG";
+		imgfile[10]="img/newglobal/photo/DSC00011.JPG";imgfile[11]="img/newglobal/photo/DSC00012.JPG";
+		imgfile[12]="img/newglobal/photo/DSC00013.JPG";imgfile[13]="img/newglobal/photo/DSC00014.JPG";
+		imgfile[14]="img/newglobal/photo/DSC00015.JPG";imgfile[15]="img/newglobal/photo/DSC00031.JPG";
+		imgfile[16]="img/newglobal/photo/DSC00017.JPG";imgfile[17]="img/newglobal/photo/DSC00018.JPG";
+		imgfile[18]="img/newglobal/photo/DSC00019.JPG";imgfile[19]="img/newglobal/photo/DSC00020.JPG";
+		imgfile[20]="img/newglobal/photo/DSC00021.JPG";imgfile[21]="img/newglobal/photo/DSC00116.JPG";
+		imgfile[22]="img/newglobal/photo/DSC00023.JPG";imgfile[23]="img/newglobal/photo/DSC00024.JPG";
+		imgfile[24]="img/newglobal/photo/DSC00025.JPG";imgfile[25]="img/newglobal/photo/DSC00026.JPG";
+		imgfile[26]="img/newglobal/photo/DSC00027.JPG";imgfile[27]="img/newglobal/photo/DSC00028.JPG";
+		imgfile[28]="img/newglobal/photo/DSC00029.JPG";imgfile[29]="img/newglobal/photo/DSC00030.JPG";
+		
+		function add()
+		{
+			var i=0;
+			var my_div = null;
+			var newDiv = null;
+				for(i=0;i<4;i++)
+				{
+					newDiv = document.createElement("input");
+					newDiv.id="photo"+i;
+					newDiv.type="image";
+					newDiv.style["margin-top"]=3+"px";
+					newDiv.style["margin-left"]=3+"px";
+					newDiv.src=imgfile[i];
+					newDiv.style["width"]=35+"px";
+					newDiv.style["height"]=35+"px";
+					newDiv.onclick=function j(){ jump(this.src)};
+  					my_div = document.getElementById("last");
+  					var move=document.getElementById("p-main-left-bot").insertBefore(newDiv, my_div);
+				}
+		}
+		
+		function jump(jumpto)
+		{
+			var i=0;
+			alert(jumpto);
+			for(i=0;i<number;i++)
+			{
+				if(jumpto.equals(imgfile[i]))
+				{
+					counter=i;
+					document.getElementById("last").innerHTML=4;
+				}//document.getElementById("last").innerHTML= i;
+			}	
+			document.getElementById("bigpic").src = jumpto;
+		}
+		
+		function move(moveway)
+		{
+			counter=counter+moveway;
+			if(counter<0)
+				counter=counter+30;
+			counter=counter%30;
+			document.getElementById("bigpic").src = imgfile[counter];
+			
+		}
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>photo</title>
+</head>
+
+<body onload="add()">
+	<div id="p-main">
+    	<div id="p-main-left">
+        	<div id="p-main-left-top">
+            	<div id="timeline" style="float:left; margin:auto; width:60px; height:30px; border-radius:10px; color:#FFF; background-color:#00C;">時間軸</div>
+                <div id="addnew" style="margin:auto; width:60px; height:30px; border-radius:10px; color:#FFF; background-color:#00C;">新增</div>
+                <dt>相簿名稱:澎湖之旅</dt>
+                <dt>拍攝時間:2010/10/05</dt>
+            </div>
+            <div id="p-main-left-mid">
+            	<img src="img/newglobal/boy3photo.jpg" width="80" height="90"/>
+            </div>
+            <div id="p-main-left-bot">
+            	<div id="last"></div>
+            </div>
+        </div>
+        <div id="p-main-right">
+        	<div id="p-main-right-top">
+            	<div id="prev" title = "上一頁">
+                	<input type="image" src="img/newglobal/back.jpg" width="35px" height="400px" style=" float:left;" onclick="move(-1)"/>
+              	</div>
+                <div id="photo">
+                	<img src="img/newglobal/photo/DSC00001.JPG" id="bigpic" width="530" height="400" style=" float:left;"/>
+                </div>
+            	<div id="next" title = "下一頁">
+                	<input type="image" src="img/newglobal/next.JPG" width="35px" height="400px" style=" float:left;" onclick="move(1)"/>
+                	<div id="photointro">
+                		<dd style="margin:auto; font-size:24px; color:#FFF; font-weight:bold;">相片介紹</dd>
+               		</div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

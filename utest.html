@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<title>utest</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		$(window).load(function(){
+			$.ajax({
+				url		: 'php/gUserList.php',
+				type	: 'post',
+				dataType: 'json',
+				data	: { userid : 6},
+				error	: function(xhr, ajaxOption, thrownError){
+					alert(thrownError);
+				},
+				success : function(result){
+					var num = result.ouser.length;
+					var a,id;
+					for(i = 0;i < num;i++){	
+						id = 'uItem.'+result.ouser[i];
+						a = 'avarat/'+result.avarat[i]+'.jpg';
+						
+						$('<div id = "'+ id +'" class = "uItem"><img class = "uItemImg" src="'+ a +'"/><span id = "'+id+'"class = "uItemName" onclick="seeUser('+result.ouser[i]+')">'+ result.nname[i]+'</span></div>').appendTo('#ulist');
+						//$(id).after('<img src = "'+a+'"/>');
+						//$('<p >'+result.nname[i]+'</p>').appendTo(id);
+					}
+				}
+			});
+		});
+		$(document).ready(function(){
+		});
+		function seeUser(id){
+				
+			alert(id);
+		}
+	</script>
+	<style type="text/css">
+		#ulist{
+			height: 300px;
+			width : 200px;
+			box-shadow:0 0 10px #06C;
+			overflow-y: scroll;
+		}
+		.uItem{
+			margin:10px;
+			width:150px;
+			height:60px;
+			box-shadow:0 0 2px black;
+		}
+		.uItemImg{
+			width:54px;
+			height:54px;
+			border-style:solid;
+			border-width:3px;
+			bolder-color:#2523D7;
+			border-radius: 3px;
+		}
+		.uItemName{
+			cursor:pointer;
+			color:blue;
+			font-size:20px;
+			font-weight:bold;
+			margin-left:5px;
+		}
+	</style>
+	<body>
+		<div id = "ulist">
+		</div>
+	</body>
+</html>
